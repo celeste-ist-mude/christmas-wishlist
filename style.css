@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+:root {
+    --back: #00080f;
+    --front: #000c17;
+    --light: #4867ff;
+}
+
+* {
+    font-family: Montserrat;
+    color: white;
+    background-color: var(--back);
+    /* overflow: hidden; */
+}
+
+body {
+    margin: 0;
+}
+
+#container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%; height: 99%;
+    background-color: var(--front);
+    font-weight: 700;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid white;
+}
+
+#add-item {
+    background-color: transparent;
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 10px 40px;
+    transition: border-color 1s;
+}
+
+#add-item:hover {
+    border-color: var(--light);
+}
+
+#popup {
+    display: none;
+    position: fixed;
+    height: 45%; width: 30%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--front);
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+#popup form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: var(--front);
+}
+
+#popup form p {
+    margin-top: -0px;
+    background-color: var(--front);
+    margin-bottom: 40px;
+}
+
+#popup form input, #popup form textarea {
+    margin-bottom: 10px;
+    resize: none;
+    border: 3px solid white;
+    border-radius: 8px;
+    outline: none;
+    background-color: var(--front);
+    transition: border-color 1s;
+}
+
+#popup form input:focus, #popup form textarea:focus {
+    border-color: var(--light);
+}
+
+#description {
+    height: 120px;
+}
+
+#buttons {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+    background-color: var(--front);
+}
+
+#buttons > button {
+    width: 40%; height: 40px;
+    background-color: var(--front);
+    border: 3px solid white;
+    border-radius: 15px;
+    transition: background-color 1s;
+}
+
+#buttons > button:hover {
+    background-color: var(--light);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.wishlist-item {
+    position: relative;
+    transform: translateX(-50%);
+    border: 3px solid white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 50px;
+    left: 50%;
+    width: 90%;
+}
+
+.wishlist-item, .wishlist-item > * {
+    background-color: var(--front);
+}
+
+.wishlist-item > p:nth-of-type(1) {
+    font-weight: 500;
+}
+
+#last-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#last-line p {
+    margin: 0;
+}
+
+.wishlist-item button {
+    border: 3px solid white;
+    border-radius: 15px;
+    width: 45%; height: 35px;
+    transition: border-color 1s;
+}
+
+.wishlist-item button:hover {
+    border-color: var(--light);
+}
+
+#wishlist, #wishlist > *, #wishlist * {
+    background-color: transparent;
+}
+
+#snow {
+    position: fixed;
+    top: 0; left: 0;
+    background-color: transparent;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    width: 15px; height: 15px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 20%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 50%;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation-name: snowfall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes snowfall {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+}

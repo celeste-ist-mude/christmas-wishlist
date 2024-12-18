@@ -1,0 +1,140 @@
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Wishlist</title>
+</head>
+
+<body>
+    <div id="snow"></div>
+    <div id="container">
+        <h1 id="title">Wishlist</h1>
+        <button id="add-item">Add a gift to wishlist</button>
+        <div id="wishlist"></div>
+        <div id="popup">
+            <form id="item-form">
+                <p id="popup-title">Add your gift !</p>
+                <input maxlength="24" type="text" id="name" placeholder="Name" required>
+                <input type="url" id="link" placeholder="Link">
+                <textarea maxlength="200" id="description" placeholder="Description" required></textarea>
+                <input type="number" id="price" placeholder="Price" required>
+                <div id="buttons">
+                    <button type="submit">Save</button>
+                    <button type="button" id="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const wishlistContainer = document.getElementById('wishlist');
+        const popup = document.getElementById('popup');
+        const addItemButton = document.getElementById('add-item');
+        const cancelButton = document.getElementById('cancel');
+        const itemForm = document.getElementById('item-form');
+        const nameInput = document.getElementById('name');
+        const linkInput = document.getElementById('link');
+        const descriptionInput = document.getElementById('description');
+        const priceInput = document.getElementById('price');
+        let editIndex = null;
+
+        function saveToLocalStorage(items) {
+            localStorage.setItem('wishlist', JSON.stringify(items));
+        }
+
+        function loadFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('wishlist')) || [];
+        }
+
+        function renderWishlist() {
+            wishlistContainer.innerHTML = '';
+            const items = loadFromLocalStorage();
+            items.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'wishlist-item';
+                itemDiv.innerHTML = `
+                    <a href="${item.link}" target="_blank">${item.name}</a>
+                    <p>${item.description}</p>
+                    <div id="last-line">
+                        <p>Price: ${item.price}€</p>
+                        <button onclick="editItem(${index})">Edit</button>
+                        <button onclick="deleteItem(${index})">Delete</button>    
+                    </div>
+                `;
+                wishlistContainer.appendChild(itemDiv);
+            });
+        }
+
+        function showPopup() {
+            popup.style.display = 'block';
+        }
+
+        function hidePopup() {
+            popup.style.display = 'none';
+            itemForm.reset();
+            editIndex = null;
+        }
+
+        addItemButton.addEventListener('click', showPopup);
+        cancelButton.addEventListener('click', hidePopup);
+
+        itemForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = nameInput.value;
+            const link = linkInput.value;
+            const description = descriptionInput.value;
+            const price = priceInput.value;
+            const items = loadFromLocalStorage();
+            const newItem = { name, link, description, price };
+
+            if (editIndex !== null) {
+                items[editIndex] = newItem;
+            } else {
+                items.push(newItem);
+            }
+
+            saveToLocalStorage(items);
+            renderWishlist();
+            hidePopup();
+        });
+
+        window.editItem = function (index) {
+            const items = loadFromLocalStorage();
+            const item = items[index];
+            nameInput.value = item.name;
+            linkInput.value = item.link;
+            descriptionInput.value = item.description;
+            priceInput.value = item.price;
+            editIndex = index;
+            showPopup();
+        };
+
+        window.deleteItem = function (index) {
+            const items = loadFromLocalStorage();
+            items.splice(index, 1);
+            saveToLocalStorage(items);
+            renderWishlist();
+        };
+
+        renderWishlist();
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            document.getElementById('snow').appendChild(snowflake);
+
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 3}s`;
+            snowflake.style.animationDelay = `${Math.random() * 5}s`;
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 8000);
+        }
+
+        setInterval(createSnowflake, 150);
+    </script>
+</body>
+
+</html>
