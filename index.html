@@ -14,19 +14,19 @@
         <h1 id="title">Wishlist</h1>
         <button id="add-item">Add a gift to wishlist</button>
         <div id="wishlist"></div>
-        <div id="popup">
-            <form id="item-form">
-                <p id="popup-title">Add your gift !</p>
-                <input maxlength="24" type="text" id="name" placeholder="Name" required>
-                <input type="url" id="link" placeholder="Link">
-                <textarea maxlength="200" id="description" placeholder="Description" required></textarea>
-                <input type="number" id="price" placeholder="Price" required>
-                <div id="buttons">
-                    <button type="submit">Save</button>
-                    <button type="button" id="cancel">Cancel</button>
-                </div>
-            </form>
-        </div>
+    </div>
+    <div id="popup">
+        <form id="item-form">
+            <p id="popup-title">Add your gift !</p>
+            <input maxlength="24" type="text" id="name" placeholder="Name" required>
+            <input type="url" id="link" placeholder="Link">
+            <textarea maxlength="200" id="description" placeholder="Description" required></textarea>
+            <input type="number" id="price" placeholder="Price" required>
+            <div id="buttons">
+                <button type="submit">Save</button>
+                <button type="button" id="cancel">Cancel</button>
+            </div>
+        </form>
     </div>
     <script>
         const wishlistContainer = document.getElementById('wishlist');
@@ -69,10 +69,12 @@
 
         function showPopup() {
             popup.style.display = 'block';
+            document.getElementById('container').classList.add('blurred')
         }
 
         function hidePopup() {
             popup.style.display = 'none';
+            document.getElementById('container').classList.remove('blurred')
             itemForm.reset();
             editIndex = null;
         }
