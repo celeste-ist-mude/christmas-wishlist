@@ -51,7 +51,9 @@ body {
     background-color: transparent;
     border: 3px solid white;
     border-radius: 15px;
-    padding: 10px 40px;
+    /* padding: 10px 40px; */
+    width: 20%; height: 5.5%;
+    min-width: 100px;
     transition: border-color 1s;
 }
 
@@ -138,7 +140,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px;
     margin-top: 50px;
     left: 50%;
-    width: 80%;
+    width: 90%;
 }
 
 .wishlist-item, .wishlist-item > * {
@@ -174,7 +176,8 @@ input[type=number]::-webkit-outer-spin-button {
 #wishlist {
     background-color: transparent;
     height: 84%; width: 35%;
-    /* min-width: 110px; */
+    min-width: 200px;
+    padding: 10px;
     overflow-y: hidden;
     position: relative;   
 }
