@@ -174,7 +174,7 @@ input[type=number]::-webkit-outer-spin-button {
 #wishlist {
     background-color: transparent;
     height: 84%; width: 35%;
-    min-width: 110px;
+    /* min-width: 110px; */
     overflow-y: hidden;
     position: relative;   
 }
